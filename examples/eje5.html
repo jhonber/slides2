@@ -2,10 +2,61 @@
  <html>
    <head>
      <title>Pereirajs</title>
+     <script type="text/javascript">
+      var imagen, timer1 = [] , timer2;
+
+      function EliminarImagen(){
+        imagen = document.getElementsByTagName('img')[0];
+        document.getElementsByTagName('img')[0].remove();
+      }
+
+      function RecuperarImagen(){
+        document.getElementsByTagName('body')[0].appendChild(imagen);
+      }
+
+      function CambiarColorTitulo(){
+        var color = document.getElementsByTagName('h1')[0].style.color;
+        if (color == "blue")
+          color = document.getElementsByTagName('h1')[0].style.color = "red";
+        else
+          color = document.getElementsByTagName('h1')[0].style.color = "blue";
+      }
+
+      function Animar(){
+        var inicial = document.getElementById('texto').style.fontSize;
+        var t = 10;
+
+        for (var i=0; i<5; ++i  ){
+          var t = setInterval(function(){
+            document.getElementById('texto').style.fontSize =  t.toString() + "px";
+            t = t + 1;
+          },1000);
+          timer1.push(t);
+        }
+
+        timer2 = setInterval(function(){
+          document.getElementById('texto').style.fontSize =  inicial;
+        },10000);
+
+      }
+
+      function PararAnimar(){
+        for (var i=0; i<timer1.length; ++i){
+          clearInterval(timer1[i]);
+        }
+        clearInterval(timer2);
+      }
+
+    </script>
    </head>
    <body>
    <h1 style="color: blue;"> Pereirajs </h1>
      <p id="texto"> Manipulación del DOM </p>
      <img style="font-size: medium;" src="../images/jake.gif" alt="jake"> </p>
+     <button onclick="EliminarImagen()">  Eliminar imagen </button>
+     <button onclick="RecuperarImagen()"> Recuperar magen </button>
+     <button onclick="CambiarColorTitulo()"> Cambiar color titulo </button>
+     <button onclick="Animar()"> Animar!! </button>
+     <button onclick="PararAnimar()"> Parar Animar!! </button>
    </body>
  </html>
